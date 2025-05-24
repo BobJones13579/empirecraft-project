@@ -1,0 +1,78 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 🏛️ Empirecraft Learning Engine – cursor-rules.md (Refined Vision)
+
+---
+
+## 1️⃣ 📂 File and Folder Structure Rules
+- **Frontend Pages (`/app`)**  
+  - Route-aligned folders: `/entry`, `/vault`, `/entry/[id]`.  
+  - Shared layouts: `/components/Layout`.  
+  - Prodding & insights: `/components/Prodding`, `/components/Insights`.  
+- **API Routes (`/pages/api`)**  
+  - Dynamic GPT prodding: `/api/generate-prods`.  
+  - Entry management: `/api/entries`, `/api/entry/[id]`, `/api/save-synthesis`.  
+- **Database & Backend (`/lib/db`)**  
+  - DB helpers, RPCs, Supabase logic.  
+  - Row-Level Security (RLS) enforced where applicable.  
+- **Utilities (`/utils`)**  
+  - GPT prompt templates, context builders, helpers.  
+- **Reusable Components (`/components`)**  
+  - Group by function: `/FocusInput`, `/SynthesisEditor`, `/ProddingEngine`, `/VaultView`.  
+
+---
+
+## 2️⃣ 🧑‍💻 Coding & Design Principles
+- All files must use **TypeScript (`.ts`, `.tsx`)**.  
+- Use **async/await** for all asynchronous calls.  
+- Styling: **Tailwind CSS only**; no inline styles or CSS modules.  
+- Keep components atomic and reusable; aim for **<300 lines each**.  
+- State management: local state or React Context; avoid unnecessary complexity.  
+- API responses: typed JSON with clear status codes.  
+
+---
+
+## 3️⃣ 🔐 Supabase Data & Security Rules
+- If using auth, each API endpoint **must validate authentication** before DB access.  
+- Apply **RLS** to isolate user data when needed.  
+- Ensure **indexes and constraints** in Supabase for performance.  
+- Regularly **back up schema & data** at dev milestones.  
+
+---
+
+## 4️⃣ 🤖 GPT Prodding Integration
+- Store prompt templates in `/utils/prompts.ts`.  
+- Prompts should be concise, contextually relevant, and aligned with **dynamic synthesis** goals.  
+- All GPT interactions funnel through `/api/generate-prods`; no frontend direct calls.  
+- Log (truncated) prompt/responses for debugging and refinement.  
+- GPT responses must be **thought-provoking and contextually anchored** to the user's synthesis flow.  
+
+---
+
+## 5️⃣ 📋 Task Modularity & Commit Hygiene
+- Tasks should break into **4–8 subtasks**; avoid monolithic code.  
+- Split large files (>500 lines) into logical modules.  
+- Modularize DB logic: e.g., `useSaveEntry`, `useFetchVault`.  
+- Commit atomically per Cursor-generated task.  
+
+---
+
+## 6️⃣ 💬 Context Management & Chat Discipline
+- Reset Cursor chat context:  
+  - After major task completion.  
+  - When chat responses become irrelevant or confused.  
+- Keep chats focused on the **task at hand**; no unrelated bloat.  
+
+---
+
+## 7️⃣ 🔄 Continuous Self-Improvement
+- Identify and document recurring patterns (prompt styles, component structures).  
+- Update `cursor-rules.md` as the system evolves to reflect lessons learned.  
+
+---
+
+## 🚨 Key Principle
+_"Empirecraft isn’t a static note-taking app—it’s a dynamic, evolving **mental gym** designed to challenge and refine your thinking. Every rule, component, and GPT interaction must reinforce this core mission."_  
