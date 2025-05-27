@@ -3,7 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Navigation } from "@/components/navigation"
+import { TopBar } from "@/components/layout/top-bar"
+import { ClientRootProvider } from "@/components/client-root-provider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -59,12 +60,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
-          <div className="min-h-screen bg-background font-sans">
-            <Navigation />
-            <main className="flex-1">{children}</main>
-          </div>
-        </ThemeProvider>
+        <ClientRootProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
+            <div className="min-h-screen bg-background font-sans">
+              <TopBar />
+              <main className="flex-1">{children}</main>
+            </div>
+          </ThemeProvider>
+        </ClientRootProvider>
       </body>
     </html>
   )

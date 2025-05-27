@@ -47,9 +47,27 @@ export function SynthesisEditor({
     }
   }
 
-  const handleSave = () => {
-    // Placeholder for save functionality
-    console.log("Saving synthesis:", { synthesis, stats: sessionStats })
+  const handleSave = async () => {
+    // MCP: Save entry to Supabase via API, passing context
+    try {
+      const res = await fetch('/api/entry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-id': 'demo-user', // TODO: Replace with real user ID from auth context
+        },
+        body: JSON.stringify({
+          title: 'Untitled Entry', // TODO: Replace with actual title from form if available
+          content: synthesis,
+          wordCount: sessionStats.wordCount,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Failed to save entry')
+      alert('Entry saved!')
+    } catch (err: any) {
+      alert('Error saving entry: ' + (err.message || 'Unknown error'))
+    }
   }
 
   return (
